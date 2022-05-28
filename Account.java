@@ -49,25 +49,68 @@ public class Account {
 
     // Function showing the main menu
     void showMenu() {
-        char option = '\0';
+        char option;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome, " + customerName + "!");
         System.out.println("Your ID is: " + customerId);
         System.out.println();
         System.out.println("What would you like yo do?");
         System.out.println();
-        System.out.println("Check => Check balance");
-        System.out.println("Deposit => Deposit money");
-        System.out.println("Withdraw => Make a withdrawal");
-        System.out.println("Prev => View previous transaction");
-        System.out.println("Calcint => Calculate interest");
-        System.out.println("Exit => Exit");
-        //do {
-          //  System.out.println();
-            //System.out.println("Enter an option: ");
-            //String option1 = scanner.next();
-            //option = Character.toUpperCase()
-        //} while (option != "Exit");
+        System.out.println("A => Check balance");
+        System.out.println("B => Deposit money");
+        System.out.println("C => Make a withdrawal");
+        System.out.println("D => View previous transaction");
+        System.out.println("E => Calculate interest");
+        System.out.println("F => Exit");
+        do {
+            System.out.println();
+            System.out.println("Enter an option: ");
+            char option1 = scanner.next().charAt(0);
+            option = Character.toUpperCase((option1));
+            System.out.println();
+
+            switch (option) {
+                // Check balance
+                case 'A' -> {
+                    System.out.println("======================");
+                    System.out.println("Balance = " + balance + " kr.");
+                    System.out.println("======================");
+                    System.out.println();
+                }
+                // Deposit money
+                case 'B' -> {
+                    System.out.println("Enter an amount to deposit: ");
+                    int depositAmount = scanner.nextInt();
+                    deposit(depositAmount);
+                    System.out.println();
+                }
+                // Withdraw money
+                case 'C' -> {
+                    System.out.println("Enter an amount to withdraw");
+                    int withdrawAmount = scanner.nextInt();
+                    withdrawal(withdrawAmount);
+                    System.out.println();
+                }
+                // View most recent transaction.
+                case 'D' -> {
+                    System.out.println("======================");
+                    getPreviousTransaction();
+                    System.out.println("======================");
+                    System.out.println();
+                }
+                // Calculate interest
+                case 'E' -> {
+                    System.out.println("Enter the amount of years: ");
+                    int yearsAmount = scanner.nextInt();
+                    calculateInterest(yearsAmount);
+                }
+                // Exit
+                case 'F' -> System.out.println("======================");
+
+                // Default
+                default -> System.out.println("The input is not valid. Pick another.");
+            }
+        } while (option != 'F');
         System.out.println("Thank you for banking with us!");
     }
 }
